@@ -17,5 +17,5 @@ Online multiplayer pong game using socket.io.
   nvm install
   nvm use
   npm install
-  npm run start
+  npm run dev
   ```
