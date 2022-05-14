@@ -15,9 +15,9 @@ app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "public", "index.html"));
 });
 
-// Listen for incoming connections on port 8080
-HTTPServer.listen(8080, () => {
-  console.log("listening on *:8080");
+// Listen for incoming connections
+HTTPServer.listen(process.env.PORT || 8080, () => {
+  console.log(`Listening on *:${process.env.PORT || 8080}`);
 });
 
 // Handle incoming socket.io server connections
