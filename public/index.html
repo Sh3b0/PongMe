@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Game</title>
+  <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css' rel='stylesheet'
+        integrity='sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor' crossorigin='anonymous'>
+</head>
+<body>
+<script type='module' src='client.mjs'></script>
+
+<div class='container'>
+  <header class='d-flex justify-content-between py-1 mb-4 border-bottom'>
+    <div class='p-2'>
+      <a href='/' class='text-dark text-decoration-none'>
+        <span class='fs-3'>PongMe</span>
+      </a>
+    </div>
+
+    <div class='p-2'>
+      <span id='score' class='fs-3'>0 - 0</span>
+    </div>
+
+    <div id='pause' class='p-2'>
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-pause-circle" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0v-3.5z"/>
+      </svg>
+      <svg hidden xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-play-circle hidden" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+      </svg>
+    </div>
+
+  </header>
+
+  <div class='input-group mb-3 d-flex justify-content-center'>
+    <input style='margin-left: 20%' type='text' id='user' class='form-control marg' placeholder='Player' aria-label='Player'>
+    <span class='input-group-text'>@</span>
+    <input type='text' id='room' class='form-control' placeholder='Room' aria-label='Room'>
+    <button style='margin-right: 20%' type='button' class='btn btn-primary' id='join'>Join</button>
+  </div>
+  <div class='d-flex justify-content-center'>
+    <canvas class='rounded'></canvas>
+  </div>
+</div>
+
+</body>
+
+</html>
