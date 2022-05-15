@@ -26,7 +26,6 @@ class Player {
 }
 
 joinBtn.onclick = () => {
-  console.log("Clicked");
   socket.emit("joinRoom", {playerName: userText.value, roomName: roomText.value}, (error) => {
     if (error) {
       alert(error);
@@ -64,13 +63,6 @@ pauseDiv.onclick = () => {
     if(player) return;
     game = new Game(gameEnv, gameState);
     player = new Player(playerNumber, 0);
-    if(playerNumber === 1) {
-      playerNameText.textContent = game.state.p1.name;
-      pausedText.textContent = game.state.p1.paused.toString();
-    } else {
-      playerNameText.textContent = game.state.p2.name;
-      pausedText.textContent = game.state.p2.paused.toString();
-    }
   });
 
   socket.on("startGame", () => {
@@ -92,7 +84,8 @@ pauseDiv.onclick = () => {
     });
   });
 
-  socket.on("locationUpdate", ({playerNumber, newLocation}) => {
+  socket.on("locationUpdate", ({playerNumber, newLocation, serverTime}) => {
+    console.log(`Latency: ${Date.now() - serverTime}`);
     switch (playerNumber) {
       case 0:
         game.state.ball.x = newLocation.x;
@@ -190,7 +183,6 @@ function draw_canvas() {
   );
   context.fill();
 }
-
 
 // Animate
 let frameRate = game ? game.env.frameRate : 20;
