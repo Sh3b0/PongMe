@@ -5,7 +5,9 @@ Online multiplayer pong game using socket.io.
 ![demo](./demo.gif)
 
 
+
 ## Local testing
+
 - With docker
   ```bash
   docker build -t pongme .
@@ -19,3 +21,15 @@ Online multiplayer pong game using socket.io.
   npm install
   npm run dev
   ```
+
+
+
+## Contribution
+
+Feel free to contribute by opening a pull request, suggest a feature or report a bug by creating an issue.
+
+
+
+## License
+
+The source code for the site is licensed under the MIT license, which you can find in the LICENSE file.
