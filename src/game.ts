@@ -41,7 +41,7 @@ export const collides = (ball: ballType, playerX: number, playerY: number) => {
   return false;
 };
 
-// Updates src on every frame
+// Updates game on every frame
 export const playGame = (io: Server, roomName: string, game: gameStateType) => {
   // Moves the ball (called on each frame)
   function moveBall() {

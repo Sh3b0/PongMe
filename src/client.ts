@@ -142,7 +142,6 @@ pauseDiv.onclick = () => {
   });
 }
 
-// Frontend stub
 function draw_canvas() {
   if (!game) return;
   canvas.width = game.env.tableWidth;
