@@ -49,7 +49,6 @@ export const playGame = (io: Server, roomName: string, game: gameStateType) => {
     io.to(roomName).emit('locationUpdate', {
       playerNumber: 0,
       newLocation: { x: game.ball.x, y: game.ball.y },
-      serverTime: Date.now(),
     });
   }
 

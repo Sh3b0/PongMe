@@ -84,8 +84,7 @@ pauseDiv.onclick = () => {
     });
   });
 
-  socket.on("locationUpdate", ({playerNumber, newLocation, serverTime}) => {
-    console.log(`Latency: ${Date.now() - serverTime}`);
+  socket.on("locationUpdate", ({ playerNumber, newLocation }) => {
     switch (playerNumber) {
       case 0:
         game.state.ball.x = newLocation.x;
