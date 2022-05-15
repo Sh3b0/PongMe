@@ -1,6 +1,11 @@
-// Properties sent to client for visualizing game.
-export const gameEnv = {
-  frameRate: 10,
+import {gameEnvType, gameStateType} from './types';
+
+// Maps a room name to a gameState
+export const games = new Map();
+
+// Properties sent to client for visualizing src.
+export const gameEnv: gameEnvType = {
+  frameRate: 20,
   tableHeight: 800,
   tableWidth: 1500,
   paddleHeight: 150,
@@ -27,7 +32,7 @@ export const gameEnv = {
   },
 };
 
-// Parameters for game logic, used only by server.
+// Parameters for src logic, used only by server.
 export const gameParams = {
   roundBreak: 3000,
   playerSpeed: 5,
@@ -41,36 +46,7 @@ export const gameParams = {
   },
 };
 
-// Maps a room name to a gameState
-export const games = new Map();
-
-// Represents a ball
-export type ballType = {
-  x: number;
-  y: number;
-  vx: number;
-  speed: number;
-  vy: number;
-};
-
-// Represents a player
-export type playerType = {
-  name: string;
-  x: number;
-  y: number;
-  score: number;
-  paused: boolean;
-};
-
-// Represents a gameState
-export type gameStateType = {
-  mainLoop: NodeJS.Timer | null;
-  ball: ballType;
-  p1: playerType;
-  p2: playerType;
-};
-
-// Represents an ongoing game.
+// Represents an ongoing src.
 export const gameState: gameStateType = {
   mainLoop: null,
   ball: {

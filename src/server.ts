@@ -1,12 +1,7 @@
-import { Server, Socket } from 'socket.io';
-import { playGame } from './game';
-import {
-  gameEnv,
-  gameParams,
-  games,
-  gameState,
-  gameStateType,
-} from './globals';
+import {Server, Socket} from 'socket.io';
+import {playGame} from './game';
+import {gameStateType} from './types';
+import {gameEnv, gameParams, games, gameState} from './globals';
 
 const clients: { client: Socket; roomName: string }[] = [];
 
@@ -20,8 +15,8 @@ export function handleClient(client: Socket, io: Server) {
   }
 
   function joinRoom(
-    data: { playerName: string; roomName: string },
-    callback: (error?: string) => void,
+      data: { playerName: string; roomName: string },
+      callback: (error?: string) => void,
   ) {
     if (!data.playerName.length || !data.roomName.length) {
       callback('Player name and room name are required.');
@@ -40,7 +35,7 @@ export function handleClient(client: Socket, io: Server) {
       games.set(data.roomName, game);
     }
     client.join(data.roomName);
-    clients.push({ client, roomName: data.roomName });
+    clients.push({client, roomName: data.roomName});
     io.to(data.roomName).emit('gameData', {
       playerNumber: roomExists ? 2 : 1,
       gameEnv,
@@ -53,7 +48,7 @@ export function handleClient(client: Socket, io: Server) {
   }
 
   function movePlayer(
-    data: { playerNumber: number; roomName: string; direction: number }
+      data: { playerNumber: number; roomName: string; direction: number }
   ) {
     const game = games.get(data.roomName);
     if (!game) return;
@@ -66,8 +61,8 @@ export function handleClient(client: Socket, io: Server) {
       }
     } else if (data.direction === -1) {
       if (
-        player.y + gameEnv.paddleHeight + gameParams.playerSpeed <
-        gameEnv.tableHeight
+          player.y + gameEnv.paddleHeight + gameParams.playerSpeed <
+          gameEnv.tableHeight
       ) {
         player.y += gameParams.playerSpeed;
       } else {
@@ -76,7 +71,7 @@ export function handleClient(client: Socket, io: Server) {
     }
     io.to(data.roomName).emit('locationUpdate', {
       playerNumber: data.playerNumber,
-      newLocation: { x: player.x, y: player.y },
+      newLocation: {x: player.x, y: player.y},
     });
   }
 
@@ -87,7 +82,7 @@ export function handleClient(client: Socket, io: Server) {
     } else {
       games.get(data.roomName).p2.paused = !games.get(data.roomName).p2.paused;
     }
-    io.to(data.roomName).emit('interrupt', { code: data.playerNumber });
+    io.to(data.roomName).emit('interrupt', {code: data.playerNumber});
   }
 
   function disconnect() {
@@ -98,7 +93,7 @@ export function handleClient(client: Socket, io: Server) {
           clearInterval(game.mainLoop);
         }
         games.delete(clients[i].roomName);
-        io.to(clients[i].roomName).emit('interrupt', { code: 0 });
+        io.to(clients[i].roomName).emit('interrupt', {code: 0});
         clients.splice(i, 1);
         return;
       }

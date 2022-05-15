@@ -1,5 +1,6 @@
-import { gameEnv, gameParams, gameStateType, ballType } from './globals';
-import { Server } from 'socket.io';
+import {gameEnv, gameParams} from './globals';
+import {gameStateType, ballType} from './types';
+import {Server} from 'socket.io';
 
 // Returns true if min <= num <= max
 function between(num: number, min: number, max: number) {
@@ -21,12 +22,12 @@ export const collides = (ball: ballType, playerX: number, playerY: number) => {
   };
 
   if (
-    between(ballCenter.x, player.left, player.right) &&
-    between(ballCenter.y, player.top, player.bottom)
+      between(ballCenter.x, player.left, player.right) &&
+      between(ballCenter.y, player.top, player.bottom)
   ) {
     const collidePoint =
-      (ballCenter.y - (player.top + gameEnv.paddleHeight / 2)) /
-      (gameEnv.paddleHeight / 2);
+        (ballCenter.y - (player.top + gameEnv.paddleHeight / 2)) /
+        (gameEnv.paddleHeight / 2);
     const angle = (collidePoint * Math.PI) / 4;
     const direction = ball.x < gameEnv.tableCenter.x ? 1 : -1;
     ball.vx = Math.ceil(direction * ball.speed * Math.cos(angle));
@@ -40,7 +41,7 @@ export const collides = (ball: ballType, playerX: number, playerY: number) => {
   return false;
 };
 
-// Updates game on every frame
+// Updates src on every frame
 export const playGame = (io: Server, roomName: string, game: gameStateType) => {
   // Moves the ball (called on each frame)
   function moveBall() {
@@ -48,7 +49,7 @@ export const playGame = (io: Server, roomName: string, game: gameStateType) => {
     game.ball.y += game.ball.vy;
     io.to(roomName).emit('locationUpdate', {
       playerNumber: 0,
-      newLocation: { x: game.ball.x, y: game.ball.y },
+      newLocation: {x: game.ball.x, y: game.ball.y},
     });
   }
 
@@ -76,15 +77,15 @@ export const playGame = (io: Server, roomName: string, game: gameStateType) => {
     game.p2.y = gameEnv.p2Location.y;
     io.to(roomName).emit('locationUpdate', {
       playerNumber: 0,
-      newLocation: { x: game.ball.x, y: game.ball.y },
+      newLocation: {x: game.ball.x, y: game.ball.y},
     });
     io.to(roomName).emit('locationUpdate', {
       playerNumber: 1,
-      newLocation: { x: game.p1.x, y: game.p1.y },
+      newLocation: {x: game.p1.x, y: game.p1.y},
     });
     io.to(roomName).emit('locationUpdate', {
       playerNumber: 2,
-      newLocation: { x: game.p2.x, y: game.p2.y },
+      newLocation: {x: game.p2.x, y: game.p2.y},
     });
   }
 
@@ -115,10 +116,10 @@ export const playGame = (io: Server, roomName: string, game: gameStateType) => {
   // Emits a winnerUpdate when any player reaches winningScore (called on each frame)
   function winnerCheck() {
     if (game.p1.score === gameParams.winningScore) {
-      io.to(roomName).emit('winnerUpdate', { winnerNumber: 1 });
+      io.to(roomName).emit('winnerUpdate', {winnerNumber: 1});
       game.p1.paused = true;
     } else if (game.p2.score === gameParams.winningScore) {
-      io.to(roomName).emit('winnerUpdate', { winnerNumber: 2 });
+      io.to(roomName).emit('winnerUpdate', {winnerNumber: 2});
       game.p1.paused = true;
     }
   }
