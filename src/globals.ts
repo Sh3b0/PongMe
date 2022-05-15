@@ -3,7 +3,7 @@ import {gameEnvType, gameStateType} from './types';
 // Maps a room name to a gameState
 export const games = new Map();
 
-// Properties sent to client for visualizing src.
+// Properties sent to client for visualizing game.
 export const gameEnv: gameEnvType = {
   frameRate: 20,
   tableHeight: 800,
@@ -32,7 +32,7 @@ export const gameEnv: gameEnvType = {
   },
 };
 
-// Parameters for src logic, used only by server.
+// Parameters for game logic, used only by server.
 export const gameParams = {
   roundBreak: 3000,
   playerSpeed: 5,
@@ -46,7 +46,7 @@ export const gameParams = {
   },
 };
 
-// Represents an ongoing src.
+// Represents an ongoing game.
 export const gameState: gameStateType = {
   mainLoop: null,
   ball: {
