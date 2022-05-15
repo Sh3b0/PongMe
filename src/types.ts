@@ -19,7 +19,7 @@ export type gameEnvType = {
     y: number;
   };
 }
-// Represents a gameState
+
 export type gameStateType = {
   mainLoop: NodeJS.Timer | null;
   ball: ballType;
@@ -27,7 +27,6 @@ export type gameStateType = {
   p2: playerType;
 };
 
-// Represents a ball
 export type ballType = {
   x: number;
   y: number;
@@ -36,7 +35,6 @@ export type ballType = {
   vy: number;
 };
 
-// Represents a player
 export type playerType = {
   name: string;
   x: number;
